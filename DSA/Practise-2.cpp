@@ -25,17 +25,22 @@ void insertAtEnd(node * &head,int data)
     }
     temp->next=newNode;
 }
-void insertAtStart(node* &head,int data)
+void reverse(node * &head)
 {
-    node *newNode=new node(data);
     if(head==NULL)
     {
-        head==newNode;
+        cout<<"The list is empty";
         return;
     }
-    node *temp=head;
-    head=newNode;
-    newNode->next=temp;
+    node *prev=NULL,*current=head,*next=head->next;//initially
+    while(current!=NULL)
+    {
+        next=current->next;//incrementing
+        current->next=prev;
+        prev=current;//incrementing
+        current=next;//incre,emting
+    }
+    head=prev;//updating the head
 }
 void display(node *head)
 {
@@ -50,19 +55,6 @@ void display(node *head)
         cout<<temp->data<<" "; 
         temp=temp->next;   
     }
-}
-bool searchKey(node *head,int key)
-{
-    node *temp=head;
-    while(temp!=NULL)
-    {
-        if(temp->data==key)
-        {
-            return true;
-        }
-        temp=temp->next;
-    }
-    return false;
 }
 void deletion(node * &head, int val)
 {
@@ -93,16 +85,12 @@ int main()
     insertAtEnd(head,1);
     insertAtEnd(head,2);
     insertAtEnd(head,3);
-    insertAtStart(head,4);
+    cout<<"the original list is:"<<endl;
     display(head);
-    // int key;
-    // cout<<"Enter key to search:";
-    // cin>>key;
-    // cout<<searchKey(head,key);
-    int val;
-    cout<<"Enter the value of the node to delete:";
-    cin>>val;
-    deletion(head,val);
+    cout<<endl;
+    reverse(head);
+    cout<<"the reversed list is:"<<endl;
     display(head);
+    
     return 0;
 }

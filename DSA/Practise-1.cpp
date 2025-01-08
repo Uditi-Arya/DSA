@@ -64,6 +64,17 @@ bool searchKey(node *head,int key)
     }
     return false;
 }
+void deletion(node * &head, int val)
+{
+    node *temp=head;
+    while(temp->next->data!=val)
+    {
+        temp=temp->next;
+    }
+    node *toDelete=temp->next;
+    temp->next=temp->next->next;
+    delete toDelete;
+}
 int main()
 {
     node *head=NULL;
@@ -72,9 +83,14 @@ int main()
     insertAtEnd(head,3);
     insertAtStart(head,4);
     display(head);
-    int key;
-    cout<<"Enter key to search:";
-    cin>>key;
-    cout<<searchKey(head,key);
+    // int key;
+    // cout<<"Enter key to search:";
+    // cin>>key;
+    // cout<<searchKey(head,key);
+    int val;
+    cout<<"Enter the value of the node to delete:";
+    cin>>val;
+    deletion(head,val);
+     display(head);
     return 0;
 }
